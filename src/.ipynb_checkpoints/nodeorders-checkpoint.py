@@ -55,6 +55,6 @@ def bfs_disconnected(data_directory, edge_list, num_nodes, neighborsMap, degrees
             connected_components.append(num_reached)
     assert(len(order) == num_nodes)
     assert(sum(connected_components) == num_nodes)
-    if not path.exists(bfs_file):
-        np.savetxt(bfs_file, order)
+    if not path.exists(import_path):
+        np.savetxt(import_path, order)
     return order, connected_components
