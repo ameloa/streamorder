@@ -1,4 +1,4 @@
-# prioritized_restreaming_paper
-Source code for paper "Prioritized Restreaming Algorithms for Balanced Graph Partitioning".
+# Prioritized Restreaming Algorithms for Balanced Graph Partitioning
+Source code for paper by Amel Awadelkarim and Johan Ugander.
 
 ...coming soon.
