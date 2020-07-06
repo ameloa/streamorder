@@ -26,7 +26,6 @@ def blp(numNodes, neighborsMap, numShards, numIterations, epsilon, c = 0.0, retu
     internal, external =  shardmap_evaluate(shardMap, numNodes, neighborsMap)
     edgeFracs.append(float(internal)/(internal+external))
     
-    movers = []
     if return_periodicity:
         print('Initializing structures for collecting periodicity data...')
         periodicity = np.zeros((numIterations+1, numIterations))
@@ -65,7 +64,6 @@ def blp(numNodes, neighborsMap, numShards, numIterations, epsilon, c = 0.0, retu
                 periodicity[period, i] = amount
         
         if (moveCounter > 0):
-            movers.append(moveCounter)
             internal, external = shardmap_evaluate(shardMap, numNodes, neighborsMap)
             edgeFracs.append(float(internal)/(internal+external))
             print(istr + 'Internal edge fraction = ', float(internal)/(internal+external))
@@ -74,7 +72,6 @@ def blp(numNodes, neighborsMap, numShards, numIterations, epsilon, c = 0.0, retu
             print(istr + 'No movers. Done.')
             while len(edgeFracs) <= numIterations:
                 edgeFracs.append(edgeFracs[-1])
-                movers.append(0)
             break
     assert(not (initialAssignment == shardMap).all())
-    return initialAssignment, edgeFracs, movers, periodicity
+    return initialAssignment, edgeFracs, periodicity

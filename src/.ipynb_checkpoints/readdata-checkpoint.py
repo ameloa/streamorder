@@ -77,7 +77,15 @@ def to_undirected(edge_iterable, num_edges, shuffle=True):
     # ascontiguousarray so that it's c-contiguous for cython code
     return np.array(neighborsMap), num_nodes, np.array(node_indices), np.ascontiguousarray(undirected_edges)
 
-def get_clean_data(FILENAME, NUM_EDGES, shuffle=True):
-    """Wrapper function for to_undirected method."""
-    neighborsMap, num_nodes, node_indices, edges = to_undirected(row_generator(FILENAME), NUM_EDGES, shuffle=shuffle)
+def get_clean_data(DATA_DIRECTORY, EDGE_LIST, NUM_EDGES, shuffle=True):
+    if os.path.exists(DATA_DIRECTORY + EDGE_LIST + '_edges.txt'):
+        edges = np.loadtxt(DATA_DIRECTORY + EDGE_LIST + '_edges.txt')
+        num_nodes = len(np.unique(edges))
+        neighborsMap = [[] for node in range(num_nodes)]
+        node_indices = [[] for node in range(num_nodes)]
+        for i in range(edges.shape[0]):
+            neighborsMap[edges[i,0]].append(edges[i,1])
+            node_indices[edges[i,0]].append(i)
+    else:
+        neighborsMap, num_nodes, node_indices, edges = to_undirected(row_generator(DATA_DIRECTORY + EDGE_LIST + '.txt'), NUM_EDGES, shuffle=shuffle)
     return neighborsMap, num_nodes, node_indices, edges

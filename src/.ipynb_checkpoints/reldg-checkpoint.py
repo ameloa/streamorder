@@ -9,7 +9,7 @@ from alg import linear_deterministic_greedy
 from shp import *
 
 def get_edge_indices(order, node_indices):
-    # returns indices of correct sort order in edges
+    # returns indices of correct sort order in edges list
     sorted_edge_indices = []
     for node in order:
         sorted_edge_indices.extend(node_indices[int(node)])
@@ -35,7 +35,7 @@ def compute_gains(numNodes, neighborsMap, assignments=None):
 '''
 def reldg(numNodes, edges, node_indices, neighborsMap, numShards=16, numIterations=10, epsilon=0.0, return_periodicity=False, return_orders=False, thresholding=False, c=-np.inf, version='random', bfs_order = None, ccs = None):
     edgeFracs = []
-    movers = []
+#     movers = []
     orders = []
     shardMap = None
         
@@ -45,21 +45,23 @@ def reldg(numNodes, edges, node_indices, neighborsMap, numShards=16, numIteratio
         assignmentHistory = np.full((numNodes, numShards), np.inf)
     else:
         periodicity = None
-            
+    
+    print('Stream order: ', version)
+    print('Computing static stream order, or first stream of dynamic order...')
     hashMap = np.arange(numNodes)
     random.shuffle(hashMap)       
     if version == 'random':
         order = hashMap
         indices = get_edge_indices(order, node_indices)
     if version == 'cc':
-        if ccs == None:
+        if ccs is None:
             print('Must pass local clustering coefficients into function.')
             return
         else:
             order = np.lexsort((hashMap, -ccs))
             indices = get_edge_indices(order, node_indices)
     if version == 'bfs':
-        if bfs_order == None:
+        if bfs_order is None:
             print('Must pass bfs ordering into function.')
             return
         else:
@@ -68,18 +70,22 @@ def reldg(numNodes, edges, node_indices, neighborsMap, numShards=16, numIteratio
         degrees = np.array([len(neighborsMap[node]) for node in range(numNodes)])
         order = np.lexsort((hashMap, -degrees)) # first stream in degree order
         indices = get_edge_indices(order, node_indices)
-    print('Beginning reLDG, version ' + version + '...')
+        
+
+    print('Beginning reLDG...')
     for i in range(numIterations):
         istr = str(i)+ ": "
+        
+        # for dynamic orders, or if gain thresholding is used
         if version == 'ambivalence' and (shardMap is not None):
             gains = compute_gains(numNodes, neighborsMap, assignments=shardMap)
             ambivalence = -np.abs(np.array(gains))
-            if return_orders and (i == 1 or i==(numIterations-1)):
+            if return_orders and (i == 1 or i == (numIterations-1)):
                 orders.append(ambivalence)
             stream_indices = get_edge_indices(np.lexsort((hashMap, ambivalence)), node_indices)
         elif version == 'gain' and (shardMap is not None):
             gains = compute_gains(numNodes, neighborsMap, assignments=shardMap)
-            if return_orders and (i == 1 or i==numIterations-1):
+            if return_orders and (i == 1 or i == numIterations-1):
                 orders.append(gains)
             stream_indices = get_edge_indices(np.lexsort((hashMap, gains)), node_indices)     
         elif thresholding and (shardMap is not None):
@@ -93,11 +99,15 @@ def reldg(numNodes, edges, node_indices, neighborsMap, numShards=16, numIteratio
         else:
             stream_indices = indices
                 
-        if thresholding and (assignments is not None):
-            num_nodes_moving, shardMap = linear_deterministic_greedy(edges, stream_indices, numNodes, numShards, shardMap, currentHist, epsilon)
+        # run one iteration.
+        # if thresholding, pass in histogram of incumbent assignments.
+        if thresholding and (shardMap is not None):
+            _, shardMap = linear_deterministic_greedy(edges, stream_indices, numNodes, numShards, shardMap, currentHist, epsilon)
         else:
-            num_nodes_moving, shardMap = linear_deterministic_greedy(edges, stream_indices, numNodes, numShards, shardMap, None, epsilon)
-        movers.append(num_nodes_moving)
+            _, shardMap = linear_deterministic_greedy(edges, stream_indices, numNodes, numShards, shardMap, None, epsilon)
+#         movers.append(num_nodes_moving)
+
+        # evaluate partition quality
         internal, external = shardmap_evaluate(shardMap, numNodes, neighborsMap)
         edgeFracs.append(float(internal)/(internal+external))
         print(istr + 'Internal edge fraction = ', float(internal)/(internal+external))
@@ -108,4 +118,4 @@ def reldg(numNodes, edges, node_indices, neighborsMap, numShards=16, numIteratio
                 periodicity[int(period), i] += 1
                 assignmentHistory[node, shardMap[node]] = i
 
-    return edgeFracs, movers, orders, periodicity
+    return edgeFracs, orders, periodicity
