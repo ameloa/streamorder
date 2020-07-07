@@ -1,4 +1,4 @@
 # Prioritized Restreaming Algorithms for Balanced Graph Partitioning
 Source code for paper by Amel Awadelkarim and Johan Ugander.
 
-...coming soon.
+To recreate all paper figures, execute all blocks in paper_figures.ipynb
