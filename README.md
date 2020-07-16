@@ -3,7 +3,7 @@ Source code for [the paper](https://arxiv.org/pdf/2007.03131.pdf) by Amel Awadel
 
 For questions, please email Amel at ameloa@stanford.edu.
 
-In this repository, we present our python implementations of three methods for balanced graph partitioning --- Balanced Label Propagation (Ugander and Backstrom, 2013), Social Hash partitioner (Kabiljo et al, 2017; Shalita et al, 2018), and Restreamed Linear Deterministic Greedy (Nishimura and Ugander, 2013). For the most part these implementations are not optimized for performance but for analyzing various design decisions of each. However reLDG is accelerated using Cython. To build the Cython code, execute `python setup.py build_ext --inplace` from within the `/src` directory, and move the contents of the newly-created `/src` folder into the outer directory (uncomment and execute cell 1 of the Jupyter notebook below).
+In this repository, we present our Python implementations of three methods for balanced graph partitioning --- Balanced Label Propagation (Ugander and Backstrom, 2013), Social Hash partitioner (Kabiljo et al, 2017; Shalita et al, 2018), and Restreamed Linear Deterministic Greedy (Nishimura and Ugander, 2013). For the most part these implementations are not optimized for performance but for analyzing various design decisions of each. However reLDG is accelerated using Cython. To build the Cython code, execute `python setup.py build_ext --inplace` from within the `/src` directory, and move the contents of the newly-created `/src` folder into the outer directory (uncomment and execute cell 1 of the Jupyter notebook below).
 
 We used the following versions of external python libraries:
 * `cvxpy==1.1.1`
