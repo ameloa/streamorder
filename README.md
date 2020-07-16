@@ -3,7 +3,7 @@ Source code for [the paper](https://arxiv.org/pdf/2007.03131.pdf) by Amel Awadel
 
 For questions, please email Amel at ameloa@stanford.edu.
 
-In this repository, we present our python implementations of three methods for balanced graph partitioning --- Balanced Label Propagation (Ugander and Backstrom, 2013), Social Hash partitioner (Kabiljo et al, 2017; Shalita et al, 2018), and Restreamed Linear Deterministic Greedy (Nishimura and Ugander, 2013). ReLDG is accelerated using Cython; to build Cython code, execute `python setup.py build_ext --inplace` from within the `/src` directory. Otherwise, these implementations are not optimized for performance but for analyzing various design decisions of each.
+In this repository, we present our python implementations of three methods for balanced graph partitioning --- Balanced Label Propagation (Ugander and Backstrom, 2013), Social Hash partitioner (Kabiljo et al, 2017; Shalita et al, 2018), and Restreamed Linear Deterministic Greedy (Nishimura and Ugander, 2013). For the most part these implementations are not optimized for performance but for analyzing various design decisions of each. However reLDG is accelerated using Cython. To build the Cython code, execute `python setup.py build_ext --inplace` from within the `/src` directory, and move the contents of the newly-created `/src` folder into the outer directory (uncomment and execute cell 1 of the Jupyter notebook below).
 
 We used the following versions of external python libraries:
 * `cvxpy==1.1.1`
@@ -25,6 +25,6 @@ To generate the results for one of the networks in the paper:
     * [web-Google](http://snap.stanford.edu/data/web-Google.html) 
     * [web-BerkStan](http://snap.stanford.edu/data/web-BerkStan.html)
 
-3. Navigate to the Jupyter notebook at `/src/paper_figures.ipynb` and execute all cells using a Python 3 kernel, adapting cell 4 to your network of choice. Note that if a network outside of our list is selected, its number of edges must be recorded in cell 5 of the notebook.
+3. Navigate to the Jupyter notebook at `/src/paper_figures.ipynb` and execute all cells using a Python 3 kernel, adapting cell 4 to your network of choice. Note that if a network outside of our list is selected, its number of edges must be recorded in cell 6 of the notebook.
 
-To generate the incumbency plot in the paper (Figure 2: Final partition quality vs Gain threshold), we must run each method with the incumbency parameter sweeping [-10, 10]. To automate this, we include a shell script `incumbency.sh` that is executed in cell 29 of the notebook. Please update the network name here, if other than web-NotreDame.
+To generate the incumbency plot in the paper (Figure 2: Final partition quality vs Gain threshold), we must run each method with the incumbency parameter sweeping [-10, 10]. To automate this, we include a shell script `incumbency.sh` that is executed in cell 29 of the notebook. Please update the network name here, if other than web-NotreDame, and wait for execution of the script to finish before loading data and plotting (may take some time).
