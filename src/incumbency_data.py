@@ -21,8 +21,6 @@ EDGE_LIST = args.edge_list
 FILENAME = os.path.join(DATA_DIRECTORY, EDGE_LIST + '.txt')
 
 edge_dict = {
-    'wiki-Vote': 103689, 
-    'email-Enron': 367662, 
     'soc-Pokec': 30622564,
     'com-LiveJournal': 68993773,
     'com-Orkut': 117185083, 
