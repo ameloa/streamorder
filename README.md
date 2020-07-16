@@ -25,6 +25,6 @@ To generate the results for one of the networks in the paper:
     * [web-Google](http://snap.stanford.edu/data/web-Google.html) 
     * [web-BerkStan](http://snap.stanford.edu/data/web-BerkStan.html)
 
-3. Navigate to the Jupyter notebook at `/src/paper_figures.ipynb` and execute all cells using a Python 3 kernel, adapting cell 4 to your network of choice. Note that if a network outside of our list is selected, its number of edges must be recorded in cell 4 of the notebook.
+3. Navigate to the Jupyter notebook at `/src/paper_figures.ipynb` and execute all cells using a Python 3 kernel, adapting cell 4 to your network of choice. Note that if a network outside of our list is selected, its number of edges must be recorded in cell 5 of the notebook.
 
 To generate the incumbency plot in the paper (Figure 2: Final partition quality vs Gain threshold), we must run each method with the incumbency parameter sweeping [-10, 10]. To automate this, we include a shell script `incumbency.sh` that is executed in cell 29 of the notebook. Please update the network name here, if other than web-NotreDame.
