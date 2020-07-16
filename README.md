@@ -5,6 +5,6 @@ In this repository, we present our implementations of three methods for balanced
 
 To generate the plots in the paper:
 
-1. Clone repo.
-2. Download and save your desired network as a .txt file, formatted as those from the Stanford Network Analysis Platform (SNAP), to the /data folder. In the paper we report on results for soc-Pokec, com-LiveJournal, com-Orkut, web-NotreDame, web-Stanford, web-Google, and web-BerkStan.
+1. Clone repository.
+2. Download and save your desired network as a .txt file, formatted as those from the Stanford Network Analysis Platform (SNAP), to the `/data` folder. In the paper we report on results for soc-Pokec, com-LiveJournal, com-Orkut, web-NotreDame, web-Stanford, web-Google, and web-BerkStan.
 3. Navigate to the Jupyter notebook at `/src/paper_figures.ipynb` in and execute all cells with a Python 3 kernel.
