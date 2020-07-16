@@ -1,7 +1,7 @@
 # Prioritized Restreaming Algorithms for Balanced Graph Partitioning
 Source code for paper by Amel Awadelkarim and Johan Ugander. For questions, please email Amel at ameloa@stanford.edu.
 
-In this repository, we present our implementations of three methods for balanced graph partitioning, all in Python 3 --- Balanced Label Propagation (Ugander and Backstrom, 2013), Social Hash partitioner (Kabiljo et al, 2017; Shalita et al, 2018), and Restreamed Linear Deterministic Greedy (Nishimura and Ugander, 2013). 
+In this repository, we present our implementations of three methods for balanced graph partitioning --- Balanced Label Propagation (Ugander and Backstrom, 2013), Social Hash partitioner (Kabiljo et al, 2017; Shalita et al, 2018), and Restreamed Linear Deterministic Greedy (Nishimura and Ugander, 2013). 
 
 To generate the plots in the paper:
 
