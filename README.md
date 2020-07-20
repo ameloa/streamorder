@@ -14,7 +14,7 @@ We used the following versions of external python libraries:
 * `seaborn==0.9.0`
 
 To generate the results for one of the networks in the paper:
-1. Clone repository.
+1. Clone repository with `git clone https://github.com/ameloa/streamorder.git`
 2. Download and save your test network as a .txt file to the `/data` folder. In the paper we report results on the following datasets, all from the Stanford Network Analysis Project (Leskovec and Krevl, 2014):
 
     * [soc-Pokec](http://snap.stanford.edu/data/soc-Pokec.html) 
@@ -25,6 +25,6 @@ To generate the results for one of the networks in the paper:
     * [web-Google](http://snap.stanford.edu/data/web-Google.html) 
     * [web-BerkStan](http://snap.stanford.edu/data/web-BerkStan.html)
 
-3. Navigate to the Jupyter notebook at `/src/paper_figures.ipynb` and execute all cells using a Python 3 kernel, adapting cell 4 to your network of choice. Note that if a network outside of our list is selected, its number of edges must be recorded in cell 6 of the notebook.
+3. Open a Jupyter instance with `jupyter notebook` and navigate to the notebook `/src/paper_figures.ipynb`. Execute all cells using a Python 3 kernel, adapting cell 4 to your network of choice. Note that if a network outside of our list is selected, its number of edges must be recorded in cell 6 of the notebook.
 
 To generate the incumbency plot in the paper (Figure 2: Final partition quality vs Gain threshold), we must run each method with the incumbency parameter sweeping [-10, 10]. To automate this, we include a shell script `incumbency.sh` that is executed in cell 29 of the notebook. Please update the network name here, if other than web-NotreDame, and wait for execution of the script to finish before loading data and plotting (may take some time).
